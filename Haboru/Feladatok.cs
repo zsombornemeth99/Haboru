@@ -126,7 +126,7 @@ namespace Haboru
                 {
                     ClearLastLine();                 
                     Console.SetCursorPosition(0, Console.CursorTop - 2);
-                    Console.Write("\n\n\tKérem adja meg a helyes választ: ");
+                    Console.Write("\n\n\tKérem adja meg a pokemon azonosítóját: ");
                     Bevitel = Console.ReadLine();
                     while (Bevitel.Length > 3 || Bevitel.Length <= 2)
                     {
@@ -157,7 +157,7 @@ namespace Haboru
                     {
                         Console.WriteLine("{0} ,egészséges, kezdeti össz stat: {1} , össz stat változás: {2}",
                         item.getNev(), kezdetiOsszStat[item.getNev()], (-1)*(kezdetiOsszStat[item.getNev()] - item.getOsszStat()));
-                    }                   
+                    }
                 }
             }
             foreach (var item in fertozottek)

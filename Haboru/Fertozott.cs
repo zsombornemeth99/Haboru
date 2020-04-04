@@ -16,6 +16,18 @@ namespace Haboru
             
         }
 
+        public void fertozottSzint(Pokemon p)
+        {
+            if (p.generacio()==1)
+            {
+                this.fertozottsegiSzint = 1;
+            }
+            else if (p.generacio() == 2)
+            {
+                this.fertozottsegiSzint = 2;
+            }
+        }
+
         public void fertozottsegSzamitas(Pokemon p)
         {
             Random r = new Random();
