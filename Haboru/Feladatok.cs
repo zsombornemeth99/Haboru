@@ -18,12 +18,14 @@ namespace Haboru
         private List<Pokemon> egeszsegesek;
         private static Random r = new Random();
         private string bevitel;
-        private Dictionary<string, int> kezdetiOsszStat = new Dictionary<string, int>();
+        private Dictionary<string, int> kezdetiOsszStat;
+        private Dictionary<string, int> elsoEvOsszStat;
 
         public string Bevitel { get => bevitel; set => bevitel = value; }
 
         public void fajlBeolvasas()
         {
+            kezdetiOsszStat = new Dictionary<string, int>();
             try
             {
                 pokemonok = new List<Pokemon>();
@@ -92,6 +94,7 @@ namespace Haboru
 
         public void haboruElsoEv()
         {
+            elsoEvOsszStat = new Dictionary<string, int>();
             for (int i = 0; i < 15; i++)
             {
                 int fertozottIndex = r.Next(0, fertozottek.Count);
@@ -101,15 +104,18 @@ namespace Haboru
                 egeszsegesek[egeszsegesIndex].eletpontValtozas(l);
             }
             Console.WriteLine("\n\n\nEgészségesek változása:");
-            foreach (Pokemon e in egeszsegesek)
+            foreach(var item in egeszsegesek)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(item);
+                elsoEvOsszStat.Add(item.getNev(), item.getOsszStat());
             }
             Console.WriteLine("\nFertőzöttek változása:");
-            foreach (Pokemon f in fertozottek)
+            foreach (var item in fertozottek)
             {
-                Console.WriteLine(f);
+                Console.WriteLine(item);
+                elsoEvOsszStat.Add(item.getNev(), item.getOsszStat());
             }
+
         }
 
         public void bekeres()
@@ -270,6 +276,33 @@ namespace Haboru
                 }
             }
         }
+
+        public void fajlbaIras()
+        {
+            StreamWriter r = new StreamWriter("jelentes.txt", false, Encoding.UTF8);
+            foreach (var item in egeszsegesek)
+            {
+                if (kezdetiOsszStat[item.getNev()] < elsoEvOsszStat[item.getNev()])
+                {
+                    r.WriteLine("{0} ,egészséges, kezdeti össz stat: {1} , össz stat változás első év után: +{2}," +
+                        " össz stat változás: {3}",
+                    item.getNev(), kezdetiOsszStat[item.getNev()], Math.Abs(kezdetiOsszStat[item.getNev()] - elsoEvOsszStat[item.getNev()]),
+                    (-1) * (kezdetiOsszStat[item.getNev()] - item.getOsszStat()));
+                }
+                else
+                {
+                    r.WriteLine("{0} ,egészséges, kezdeti össz stat: {1} , össz stat változás első év után: {2}," +
+                        " össz stat változás: {3}",
+                    item.getNev(), kezdetiOsszStat[item.getNev()], (-1) * (kezdetiOsszStat[item.getNev()] - elsoEvOsszStat[item.getNev()]),
+                    (-1) * (kezdetiOsszStat[item.getNev()] - item.getOsszStat()));
+                }
+            }
+
+
+            r.Close();
+        }
+
+
 
         public static void ClearLastLine()
         {

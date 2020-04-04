@@ -21,7 +21,7 @@ namespace Haboru
             //f.jelentes(f.Bevitel);
             Console.WriteLine();
             f.haboruMasidikEv();
-
+            f.fajlbaIras();
             Console.ReadLine();
         }
     }
