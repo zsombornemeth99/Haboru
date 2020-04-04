@@ -178,7 +178,7 @@ namespace Haboru
             }
         }
 
-        public void haboruMasidikEv()
+        public void haboruMasodikEv()
         {            
             for (int i = 0; i < 30; i++)
             {
@@ -264,16 +264,16 @@ namespace Haboru
                     }
                 }
 
-                Console.WriteLine("Csapat");
-                foreach (var item in csapatEgeszseges)
-                {
-                    Console.WriteLine(item);
-                }
-                Console.WriteLine("Csapat");
-                foreach (var item in csapatFertozott)
-                {
-                    Console.WriteLine(item);
-                }
+                //Console.WriteLine("Csapat");
+                //foreach (var item in csapatEgeszseges)
+                //{
+                //    Console.WriteLine(item);
+                //}
+                //Console.WriteLine("Csapat");
+                //foreach (var item in csapatFertozott)
+                //{
+                //    Console.WriteLine(item);
+                //}
             }
         }
 
@@ -297,12 +297,65 @@ namespace Haboru
                     (-1) * (kezdetiOsszStat[item.getNev()] - item.getOsszStat()));
                 }
             }
-
+            r.WriteLine();
+            foreach (var item in fertozottek)
+            {
+                if (kezdetiOsszStat[item.getNev()] < elsoEvOsszStat[item.getNev()])
+                {
+                    r.WriteLine("{0} ,fertőzött, kezdeti össz stat: {1} , össz stat változás első év után: +{2}," +
+                        " össz stat változás: {3}",
+                    item.getNev(), kezdetiOsszStat[item.getNev()], Math.Abs(kezdetiOsszStat[item.getNev()] - elsoEvOsszStat[item.getNev()]),
+                    (-1) * (kezdetiOsszStat[item.getNev()] - item.getOsszStat()));
+                }
+                else
+                {
+                    r.WriteLine("{0} ,fertőzött, kezdeti össz stat: {1} , össz stat változás első év után: {2}," +
+                        " össz stat változás: {3}",
+                    item.getNev(), kezdetiOsszStat[item.getNev()], (-1) * (kezdetiOsszStat[item.getNev()] - elsoEvOsszStat[item.getNev()]),
+                    (-1) * (kezdetiOsszStat[item.getNev()] - item.getOsszStat()));
+                }
+            }
 
             r.Close();
         }
 
+        public void haboruHarmadikEv()
+        {
+            foreach (var item in egeszsegesek)
+            {
+                for (int i = 0; i < fertozottek.Count; i++)
+                {
+                    bool l = item.harcol(fertozottek[i]);
+                    item.eletpontValtozas(l);
+                    fertozottek[i].eletpontValtozas(l);
+                }
+            }
+            int OsszStatEgeszseges = 0;
+            int OsszStatFertozott = 0;
 
+            foreach (var item in egeszsegesek)
+                OsszStatEgeszseges += item.getOsszStat();
+
+            foreach (var item in fertozottek)
+                OsszStatFertozott += item.getOsszStat();
+
+            if (OsszStatEgeszseges > OsszStatFertozott)
+            {
+                Console.WriteLine("Az egészséges csapat győzött!" +
+                    "\n\tEgészséges csapat statja: "+OsszStatEgeszseges+"" +
+                    "\n\tFertőzött csapat statja: " + OsszStatFertozott);
+            }
+            else if (OsszStatEgeszseges < OsszStatFertozott)
+            {
+                Console.WriteLine("A fertőzött csapat győzött!" +
+                    "\n\tEgészséges csapat statja: " + OsszStatEgeszseges +
+                    "\n\tFertőzött csapat statja: " + OsszStatFertozott);
+            }
+            else
+            {
+                Console.WriteLine("Döntetlen!");
+            }
+        }
 
         public static void ClearLastLine()
         {
