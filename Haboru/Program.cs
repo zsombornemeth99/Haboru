@@ -16,9 +16,11 @@ namespace Haboru
             f.virusKitores();
             f.haboruElsoEv();
             Console.WriteLine("\n");
-            f.bekeres();
+            //f.bekeres();
+            //Console.WriteLine();
+            //f.jelentes(f.Bevitel);
             Console.WriteLine();
-            f.jelentes(f.Bevitel);
+            f.haboruMasidikEv();
 
             Console.ReadLine();
         }

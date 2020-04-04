@@ -84,6 +84,18 @@ namespace Haboru
             }
         }
 
+        public void eletpontValtozasMasodikEv(bool gyoz)
+        {
+            if (gyoz)
+            {
+                this.osszStat += 20;
+            }
+            else
+            {
+                this.osszStat -= 20;
+            }
+        }
+
         public override string ToString()
         {
             return string.Format("{0} - {1} - {2} - {3}", this.nev, this.azonosito, this.termElem, this.osszStat);

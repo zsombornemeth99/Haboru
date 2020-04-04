@@ -172,6 +172,104 @@ namespace Haboru
             }
         }
 
+        public void haboruMasidikEv()
+        {            
+            for (int i = 0; i < 30; i++)
+            {
+                int nullaVagyEgy = r.Next(0, 2);
+                List<Pokemon> csapatEgeszseges = new List<Pokemon>();
+                List<Fertozott> csapatFertozott = new List<Fertozott>();
+
+                if (nullaVagyEgy == 0)
+                {
+                    int csapatOsszStatEgeszseges = 0;
+                    int csapatOsszStatFertozott = 0;
+
+                    int kivalasztas = r.Next(0, egeszsegesek.Count);
+                    csapatEgeszseges.Add(egeszsegesek[kivalasztas]);
+                    int kivalasztas2 = r.Next(0, egeszsegesek.Count);
+                    csapatEgeszseges.Add(egeszsegesek[kivalasztas2]);
+
+                    foreach (var item in csapatEgeszseges)
+                        csapatOsszStatEgeszseges += item.getOsszStat();
+
+                    int kivalasztas3 = r.Next(0, fertozottek.Count);
+                    int kivalasztas4 = r.Next(0, fertozottek.Count);
+                    csapatFertozott.Add(fertozottek[kivalasztas3]);
+                    csapatFertozott.Add(fertozottek[kivalasztas4]);
+
+                    foreach (var item in csapatFertozott)
+                        csapatOsszStatFertozott += item.getOsszStat();
+
+                    if (csapatOsszStatEgeszseges > csapatOsszStatFertozott)
+                    {
+                        foreach (var item in csapatEgeszseges)
+                            item.eletpontValtozasMasodikEv(true);
+                        foreach (var item in csapatFertozott)
+                            item.eletpontValtozasMasodikEv(false);
+                    }
+                    else
+                    {
+                        foreach (var item in csapatEgeszseges)
+                            item.eletpontValtozasMasodikEv(false);
+                        foreach (var item in csapatFertozott)
+                            item.eletpontValtozasMasodikEv(true);
+                    }
+                }
+                else
+                {
+
+                    int csapatOsszStatEgeszseges = 0;
+                    int csapatOsszStatFertozott = 0;
+
+                    int kivalasztas = r.Next(0, egeszsegesek.Count);
+                    csapatEgeszseges.Add(egeszsegesek[kivalasztas]);
+                    int kivalasztas2 = r.Next(0, egeszsegesek.Count);
+                    csapatEgeszseges.Add(egeszsegesek[kivalasztas2]);
+                    int kivalasztas3 = r.Next(0, egeszsegesek.Count);
+                    csapatEgeszseges.Add(egeszsegesek[kivalasztas3]);
+
+                    foreach (var item in csapatEgeszseges)
+                        csapatOsszStatEgeszseges += item.getOsszStat();
+
+                    int kivalasztas4 = r.Next(0, fertozottek.Count);
+                    int kivalasztas5 = r.Next(0, fertozottek.Count);
+                    int kivalasztas6 = r.Next(0, fertozottek.Count);
+                    csapatFertozott.Add(fertozottek[kivalasztas4]);
+                    csapatFertozott.Add(fertozottek[kivalasztas5]);
+                    csapatFertozott.Add(fertozottek[kivalasztas6]);
+
+                    foreach (var item in csapatFertozott)
+                        csapatOsszStatFertozott += item.getOsszStat();
+
+                    if (csapatOsszStatEgeszseges > csapatOsszStatFertozott)
+                    {
+                        foreach (var item in csapatEgeszseges)
+                            item.eletpontValtozasMasodikEv(true);
+                        foreach (var item in csapatFertozott)
+                            item.eletpontValtozasMasodikEv(false);
+                    }
+                    else
+                    {
+                        foreach (var item in csapatEgeszseges)
+                            item.eletpontValtozasMasodikEv(false);
+                        foreach (var item in csapatFertozott)
+                            item.eletpontValtozasMasodikEv(true);
+                    }
+                }
+
+                Console.WriteLine("Csapat");
+                foreach (var item in csapatEgeszseges)
+                {
+                    Console.WriteLine(item);
+                }
+                Console.WriteLine("Csapat");
+                foreach (var item in csapatFertozott)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
 
         public static void ClearLastLine()
         {
