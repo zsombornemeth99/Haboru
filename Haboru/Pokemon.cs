@@ -21,7 +21,6 @@ namespace Haboru
             this.osszStat = osszStat;
         }
 
-        //GET
         public string getNev()
         {
             return this.nev;
@@ -38,7 +37,7 @@ namespace Haboru
         {
             return this.osszStat;
         }
-        //SET
+
         public void setNev(string nev)
         {
             this.nev = nev;
@@ -56,8 +55,7 @@ namespace Haboru
             this.osszStat = osszStat;
         }
 
-        //Pokemon generációja
-        public int Generacio()
+        public int generacio()
         {
             if (this.azonosito[1] == '0')
             {
@@ -68,11 +66,12 @@ namespace Haboru
                 return 2;
             }
         }
-        //Harc
-        public bool Harcol(Pokemon p)
+
+        public bool harcol(Pokemon p)
         {
             return this.osszStat >= p.osszStat;
         }
+
         public void eletpontValtozas(bool gyoz)
         {
             if (gyoz)
@@ -84,7 +83,6 @@ namespace Haboru
                 this.osszStat -= 10;
             }
         }
-
 
         public override string ToString()
         {
